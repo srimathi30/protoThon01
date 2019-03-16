@@ -1,0 +1,20 @@
+import csv
+import random
+
+a=1
+val=[]
+def rand():
+    val.clear()
+    for i in range(1,6):
+        val.append(random.randint(1,10))
+    val.insert(0,a)
+    return val
+row = ['#', 'num1', 'num2','num3','num4','num5']
+
+with open('person1.csv', 'a') as csvFile:
+    writer = csv.writer(csvFile)
+    writer.writerow(row)
+    while(10):
+        writer.writerow(rand())
+        a+=1
+csvFile.close()
