@@ -1,0 +1,15 @@
+a=input("enter the numbers:")
+list=a.split(",")
+print(list)
+sq=0
+count=len(list)
+print(count)
+
+for i in list:
+    i=int(i)
+    sq+=i ** 2
+print(sq)
+mean=sq/(count)
+print(mean)
+root=mean ** 0.5
+print(root)
