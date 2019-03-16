@@ -1,0 +1,80 @@
+from tkinter import *
+import csv
+import threading
+
+app =Tk()
+app.title("Database")
+app.geometry("300x300")
+
+L1=Label(app,text = "Name").grid(row=1,column=0)
+E1=Entry(app)
+E1.grid(row=1,column=1)
+L2=Label(app,text = "mobile" ).grid(row=2,column=0)
+E2=Entry(app)
+E2.grid(row=2,column=1)
+L3=Label(app,text = "Email").grid(row=3,column=0)
+E3=Entry(app)
+E3.grid(row=3,column=1)
+L4=Label(app,text = "Institution").grid(row=4,column=0)
+E4=Entry(app)
+E4.grid(row=4,column=1)
+
+
+
+from datetime import datetime
+
+# current date and time
+now = datetime.now()
+ts = datetime.timestamp(now)
+s=time.strftime("%H:%M:%S",time.localtime(int(ts)))
+
+import uuid 
+  
+# Printing random id using uuid1() 
+#print ("The random id using uuid1() is : ",end="") 
+#print (uuid.uuid1()) 
+
+#def con():
+    #a=threading.Thread(target=rand)
+    #a.start()
+
+
+val=[]
+
+def rand():
+    val.append(E1.get())
+    val.append(E2.get())
+    val.append(E3.get())
+    val.append(E4.get())
+    val.append(s)
+    val.append(uuid.uuid1())
+
+    return val
+row = ['Name', 'Mobile', 'Email','Institution','TimeStamp','uuid']
+
+def add():
+    with open('person.csv','w') as csvfile:
+        wr= csv.writer(csvfile)
+        wr.writerow(row)
+        wr.writerow(rand())
+        
+        
+def srch():
+    n1=E5.get()
+    csv_file = csv.reader(open('person.csv', 'r'), delimiter=",")
+    for row in csv_file:
+    #if current rows 2nd value is equal to input, print that row
+        if row == n1:
+            print(row)
+
+
+        
+Button(app,text="Submit",command=add).grid(row=7,column=0)
+Button(app,text="Cancel",command=app.destroy).grid(row=7,column=1)
+Button(app,text="Search",command=srch).grid(row=10,column=1)
+
+L5=Label(app,text = "Search").grid(row=9,column=0)
+E5=Entry(app)
+E5.grid(row=9,column=1)
+
+app.mainloop()
