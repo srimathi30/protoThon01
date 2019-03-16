@@ -1,0 +1,5 @@
+sen=input("enter the sentence:")
+print(sen.upper())
+print(sen.lower())
+print(sen.title())
+print(sen.capitalize())
